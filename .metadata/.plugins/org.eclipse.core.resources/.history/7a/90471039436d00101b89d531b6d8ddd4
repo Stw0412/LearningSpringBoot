@@ -1,0 +1,14 @@
+package com.example.demo;
+
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/student")
+public class StudentController {
+
+    @GetMapping("/details")
+    public Student createStudent(@RequestBody Student student) {
+        // ในที่นี้จำลองว่าเรารับ student เข้ามาแล้ว return กลับ
+        return student;
+    }
+}

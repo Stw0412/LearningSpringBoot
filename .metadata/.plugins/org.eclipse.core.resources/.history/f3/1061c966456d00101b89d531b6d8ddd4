@@ -1,0 +1,16 @@
+package com.example.demo;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/student")
+public class StudentController {
+
+    @PostMapping("/nameAge")
+    public List<Student> getStudents(@RequestBody List<Student> students) {
+        // เมธอดนี้จะรับ List ของ Student objects จาก JSON body
+        // และส่ง List นั้นกลับไปเป็น Response ในรูปแบบ JSON
+        return students;
+    }
+}

@@ -1,0 +1,14 @@
+package com.example.demo;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/student")
+public class StudentController {
+
+    @PostMapping("/nameAge")
+    public List<Student> getStudents(@RequestBody List<Student> students) {
+        return students;
+    }
+}
