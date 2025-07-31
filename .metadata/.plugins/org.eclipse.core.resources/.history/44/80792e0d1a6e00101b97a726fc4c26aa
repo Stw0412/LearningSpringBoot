@@ -1,0 +1,49 @@
+package com.example.demo.Controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.model.HelloName;
+import com.example.demo.model.HelloResponseModel;
+
+import jakarta.validation.Valid;
+
+@RestController
+public class HomeController {
+
+	@GetMapping("/home")
+    public String hello(@RequestParam(value = "name", defaultValue = "Team Sutthiwat silaket") String name) {
+        return String.format("Hello %s", name);
+    }
+
+    @PostMapping("/home")
+    public HelloResponseModel hello(@RequestBody HelloName request) {
+        String name = request.getName();
+        return new HelloResponseModel("Hello, " + name);
+    }
+    
+    
+ // ✅ ตัวอย่างการใช้ @RequestParam
+    @GetMapping("/RParam")
+    public String RParam(@RequestParam String name, @RequestParam int age) {
+        return "Hello " + name + ", you are " + age + " years old.";
+    }
+
+    // ✅ ตัวอย่างการใช้ @PathVariable
+    @GetMapping("/PVariable/{name}/{age}")
+    public String userInfo(@PathVariable String name, @PathVariable int age) {
+        return name + " is " + age + " years old.";
+    }
+
+    // ✅ ตัวอย่างการใช้ @RequestBody แสดงข้อความกลับ
+    @PostMapping("/RBody")
+    public String info(@Valid @RequestBody HelloName request) {
+        return "Received name: " + request.getName();
+    }
+    
+    
+}

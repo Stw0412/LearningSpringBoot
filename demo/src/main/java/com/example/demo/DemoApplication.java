@@ -11,15 +11,6 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "Team Sutthiwat silaket") String name) {
-        return String.format("Hello %s", name);
-    }
-
-    @PostMapping("/hello")
-    public HelloResponse hello(@RequestBody HelloName request) {
-        String name = request.getName();
-        return new HelloResponse("Hello, " + name);
-    }
+    
 }
 
