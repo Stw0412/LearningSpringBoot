@@ -59,6 +59,12 @@ public class StudentController {
         return "ลบนักเรียนรหัส " + id + " เรียบร้อยแล้ว";
     }
 	
+	@GetMapping("/ageBetween")
+	public List<Student> getStudentsByAgeRange() {
+	    return studentRepo.findByAgeBetween(18, 25);
+	}
+
+	
 	
 	
 }
