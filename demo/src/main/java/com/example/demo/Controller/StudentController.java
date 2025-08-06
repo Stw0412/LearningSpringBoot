@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 //import com.example.demo.Services.StudentServices;
@@ -58,13 +59,59 @@ public class StudentController {
         studentRepo.deleteById(id);
         return "ลบนักเรียนรหัส " + id + " เรียบร้อยแล้ว";
     }
-	
+	// ค้นหาอายุระหว่าง xx และ yy
 	@GetMapping("/ageBetween")
-	public List<Student> getStudentsByAgeRange() {
-	    return studentRepo.findByAgeBetween(18, 25);
+	public List<Student> getStudentsByAgeRange(
+	        @RequestParam int min,
+	        @RequestParam int max) {
+	    return studentRepo.findByAgeBetween(min, max);
+	}
+	//ค้นหาด้วยชื่อได้ทุกอักษร
+	@GetMapping("/searchByName")
+	public List<Student> searchByName(@RequestParam String keyword) {
+	    return studentRepo.findByNameContainingIgnoreCase(keyword);
+	}
+	//เรียงอายุมากไปน้อย และ น้อยไปมาก
+	@GetMapping("/sortByAge")
+	public List<Student> sortByAge(@RequestParam(defaultValue = "asc") String direction) {
+	    if (direction.equalsIgnoreCase("desc")) {
+	        return studentRepo.findAllByOrderByAgeDesc();
+	    }
+	    return studentRepo.findAllByOrderByAgeAsc();
+	}
+	
+	
+	@GetMapping("/search")
+	public List<Student> searchStudents(
+	    @RequestParam String name,
+	    @RequestParam int minAge,
+	    @RequestParam int maxAge,
+	    @RequestParam(defaultValue = "age") String sortBy,
+	    @RequestParam(defaultValue = "asc") String direction
+	) {
+	    // ค้นหาจาก repo
+	    List<Student> result = studentRepo.findByNameContainingIgnoreCaseAndAgeBetween(name, minAge, maxAge);
+
+	    // จัดเรียงภายในหน่วยความจำด้วยโค้ดที่อ่านง่ายขึ้น
+	    result.sort((a, b) -> {
+	        int comparisonResult = 0;
+
+	        // เลือกการเรียงลำดับตาม "age" หรือ "id"
+	        if (sortBy.equalsIgnoreCase("age")) {
+	            comparisonResult = Integer.compare(a.getAge(), b.getAge());
+	        } else if (sortBy.equalsIgnoreCase("id")) {
+	            comparisonResult = Long.compare(a.getId(), b.getId());
+	        }
+
+	        // ถ้าต้องการเรียงจากมากไปน้อย ให้กลับค่าผลลัพธ์
+	        if (direction.equalsIgnoreCase("desc")) {
+	            comparisonResult = -comparisonResult;
+	        }
+
+	        return comparisonResult;
+	    });
+
+	    return result;
 	}
 
-	
-	
-	
 }
