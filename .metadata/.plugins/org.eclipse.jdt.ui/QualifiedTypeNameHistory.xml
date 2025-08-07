@@ -24,7 +24,16 @@
     <fullyQualifiedTypeName name="org.springframework.web.service.annotation.DeleteExchange"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.example.demo.entities.Student"/>
     <fullyQualifiedTypeName name="java.util.Comparator"/>
+    <fullyQualifiedTypeName name="com.example.demo.repositories.CowRepository"/>
+    <fullyQualifiedTypeName name="com.example.demo.repositories.FarmRepository"/>
+    <fullyQualifiedTypeName name="com.example.demo.repositories.OwnerRepository"/>
+    <fullyQualifiedTypeName name="com.example.demo.entities.Owner"/>
+    <fullyQualifiedTypeName name="com.example.demo.entities.Farm"/>
+    <fullyQualifiedTypeName name="com.example.demo.entities.Cow"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonManagedReference"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonBackReference"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.example.demo.dto.CowSearchRequest"/>
 </qualifiedTypeNameHistroy>

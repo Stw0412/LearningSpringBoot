@@ -1,0 +1,3 @@
+2025-08-07 20:29:25.717600+07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "OWNERCOW" not found; SQL statement:
+SELECT * FROM OWNERCOW [42102-232]
